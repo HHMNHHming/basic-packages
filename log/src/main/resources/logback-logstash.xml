@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <springProperty scope="context" name="logstash.host" source="logstash.host"></springProperty>
+    <springProperty scope="context" name="logstash.port" source="logstash.port"></springProperty>
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name"></springProperty>
+    <springProperty scope="context" name="spring.profiles.active" source="spring.profiles.active"></springProperty>
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstash.host}:${logstash.port}</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        <!--es索引名称 -->
+<!--                        "_index":"${spring.profiles.active}-${spring.application.name}-%d{yyyy.MM.dd}",-->
+                        <!--应用名称 -->
+                        "app_name":"${spring.application.name}",
+                        "env":"${spring.profiles.active}",
+                        <!--线程名称 -->
+                        "thread_name": "%thread",
+                        <!--日志级别 -->
+                        "level": "%level",
+                        <!--日志名称 -->
+                        "logger_name": "%logger",
+                        <!--日志信息 -->
+                        "message": "%msg",
+                        <!--日志堆栈 -->
+                        "stack_trace": "%exception"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+    <root level="INFO" >
+        <!-- <appender-ref ref="CONSOLE"/> -->
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+</configuration>
