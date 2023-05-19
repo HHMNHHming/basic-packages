@@ -45,10 +45,10 @@ public class WebFilter implements Filter {
                         request.setAttribute("roleIds",roleIds);
                     }
                 }else{
-                    GDCLog.error("System","com.gdc.avp.components.filter.WebFilter.doFilter","Token不合法（长度小于3）："+jwt);
+                    GDCLog.error("System","com.gdc.avpdatacloud.components.filter.WebFilter.doFilter","Token不合法（长度小于3）："+jwt);
                 }
             }catch (Exception e){
-                GDCLog.error("System","com.gdc.avp.components.filter.WebFilter.doFilter",e.getMessage());
+                GDCLog.error("System","com.gdc.avpdatacloud.components.filter.WebFilter.doFilter",e.getMessage());
             }
         }
         filterChain.doFilter(servletRequest,servletResponse);
