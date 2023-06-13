@@ -7,7 +7,7 @@
     <!-- 设置父工程的一些信息 -->
     <groupId>com.gwm.avpdatacloud</groupId>
     <artifactId>basic-packages</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
     <modules>
         <module>global</module>
         <module>utils</module>
